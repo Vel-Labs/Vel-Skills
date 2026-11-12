@@ -1,0 +1,41 @@
+{
+  "title": {
+    "kicker": "PRODUCT NAME  ·  INTERNAL DEMO",
+    "lines": ["A real demo.", "A live run on real data."],
+    "sub": "Watch the product work, then read the measured cost.",
+    "caption_kicker": "PRODUCT NAME  ·  INTERNAL DEMO",
+    "caption": "A live demo of the real app. Real data. Real numbers.",
+    "seconds": 2
+  },
+  "clips": [
+    {
+      "start": 0.0,
+      "end": 3.0,
+      "kicker": "LIVE SESSION",
+      "caption": "Open the app. Start the real workflow."
+    },
+    {
+      "start": 3.0,
+      "end": 6.0,
+      "kicker": "THE MOMENT THAT MATTERS",
+      "caption": "Punch in on the result. Every figure is from the run.",
+      "zoom": { "at": 0.3, "duration": 0.4, "scale": 1.3, "cx": 0.5, "cy": 0.42 }
+    }
+  ],
+  "end": {
+    "kicker": "THE CATCH",
+    "caption_kicker": "THE CATCH",
+    "caption": "Say the limit in plain language. Do not hide the caveat.",
+    "seconds": 2,
+    "body": [
+      {
+        "title": "This is the measured total.",
+        "text": "Repeat the in-app cost or value comparison here, using the same digits the dashboard showed."
+      },
+      {
+        "title": "Name the assumptions.",
+        "text": "If a volume or rate is projected or assumed, the caption and this card both say so."
+      }
+    ]
+  }
+}
