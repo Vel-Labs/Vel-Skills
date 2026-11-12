@@ -45,5 +45,6 @@ Restart the agent session if it only reads skills at startup, then point it at t
 | Skill | Group | What it is for |
 | --- | --- | --- |
 | [app-demo-video](skills/media/app-demo-video/SKILL.md) | media | Make a dramatic, real-data demo video of a working app by styling a camera-ready frontend, recording it with Playwright, and compositing a reserved caption bar with ffmpeg. |
+| [dogfood](skills/testing/dogfood/SKILL.md) | testing | Dogfood an application through independent first-time-user journeys in real browsers, consolidate evidence, and verify authorized fixes. |
 
 The same list, grouped, is in [SKILLS_INDEX.md](SKILLS_INDEX.md). The contract for adding a skill is in [CONTRIBUTING.md](CONTRIBUTING.md).

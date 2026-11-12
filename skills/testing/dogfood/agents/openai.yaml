@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dogfood"
+  short_description: "Test real user journeys and verify scoped fixes"
+  default_prompt: "Use $dogfood to test this app through independent first-time-user journeys and report evidence-backed findings."
