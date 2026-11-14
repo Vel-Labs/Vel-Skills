@@ -1,7 +1,24 @@
 ---
 name: kebab-name
 description: When to use this skill. Name the task and the kind of input that should trigger it.
+metadata:
+  origin: internal
+  source: Vel-Skills
+  created: "YYYY-MM-DD"
+  reviewed: "YYYY-MM-DD"
+  reviewed-by: _person or agent_
+  review-every-days: "90"
+  review-due: "YYYY-MM-DD"
+  notes: _One line shown in the index._
 ---
+
+<!-- External or adapted skills: add source-ref, and start with this section.
+## First: check this skill is still reviewed
+
+Compare today's date with `review-due`. If it has passed, tell the person when the
+skill was last reviewed, against which source and ref, and offer to review it now.
+If they decline or nobody can be asked, use the pinned copy and report it overdue.
+-->
 
 # Skill title
 
