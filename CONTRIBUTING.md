@@ -26,7 +26,8 @@ metadata:
 ```
 
 The review fields are explained in [skills/meta/skill-review](skills/meta/skill-review/SKILL.md).
-External and adapted skills are pinned copies: never fetch, `npx -y` or run `@latest`
+Record the redistribution license in top-level `license` and retain required
+notices for external and adapted skills. These skills are pinned copies: never fetch, `npx -y` or run `@latest`
 upstream code at use time, and start the body with the review check section.
 
 The body defines these sections:

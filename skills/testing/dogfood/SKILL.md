@@ -1,14 +1,41 @@
 ---
-name: dogfood
+name: "dogfood"
 description: "Dogfood an application through independent first-time-user journeys in real browsers, consolidate evidence, and verify authorized fixes. Use for hands-on product dogfooding and launch-readiness checks."
+metadata:
+  origin: internal
+  source: Vel-Skills
+  created: "2026-10-28"
+  reviewed: "2026-11-14"
+  reviewed-by: Codex (GPT-6)
+  review-every-days: "90"
+  review-due: "2027-02-12"
+  notes: Independent browser journeys with evidence and post-fix verification.
 ---
 
 # Dogfood
 
+## Purpose
+
+Test a first-use browser journey through an observable result.
+
+## Inputs
+
+- Target build, journey, expected result, test data, and authorization described in [the run contract](references/run-contract.md).
+
+## Outputs
+
+- A consolidated report with persona evidence and any authorized verification.
+
+## Non-goals
+
+- Population research, inferred root causes presented as observations, or repairs outside the task.
+
 Test the path from first encounter to an observable useful result. Keep persona
 observations distinct from technical diagnosis and real-user research.
 
-## Establish the run
+## Workflow
+
+### Establish the run
 
 Read [run-contract.md](references/run-contract.md). Infer the target, journey,
 success criteria, and authority from the request and project context. Ask only
@@ -19,7 +46,7 @@ Read [browser-execution.md](references/browser-execution.md) and only the releva
 driver reference. Verify actual capabilities before assigning work. Do not claim
 a browser journey from source inspection, mocked interaction, or an API probe.
 
-## Run independent journeys
+### run independent journeys
 
 Use these five profiles by default for a comprehensive run; honor a narrower or
 different requested set:
@@ -45,7 +72,7 @@ before changing the app; do not mix pre-fix and post-fix builds in one cohort.
 The coordinator applies the relevant [coverage checks](references/coverage.md)
 separately. Do not count these checks as extra persona users.
 
-## Consolidate and repair
+### consolidate and repair
 
 Merge findings by supported root cause, retaining each observation and evidence
 link. Rank by consequence, then affected/exposed personas and recovery cost.
@@ -58,7 +85,7 @@ regressions. Preserve unrelated work. Resolve ambiguous intended behavior before
 changing it; continue independent work when one issue is blocked. Do not silently
 change success criteria, expected behavior, or fixtures to obtain a pass.
 
-## Verify and report
+### verify and report
 
 After fixes, replay each original failure against the recorded expectation.
 Also rerun the selected personas in fresh sessions and, where available, fresh
@@ -76,3 +103,11 @@ launch readiness or real-user comprehension.
 
 Keep one consolidated report and the evidence it references in the project's
 designated output location. Do not store run history inside this installed skill.
+
+## Checks
+
+- Run the [coverage checks](references/coverage.md) and verify application state on the final candidate.
+
+## Failure modes & recovery
+
+If browser isolation is unavailable, run separate fresh sessions sequentially. If a browser journey is blocked, record the condition and evidence and report it as unverified.
