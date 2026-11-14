@@ -12,8 +12,22 @@ Each skill lives at `skills/<group>/<kebab-name>/`.
 ---
 name: kebab-name
 description: When to use this skill.
+metadata:
+  origin: internal              # internal | external | adapted
+  source: Vel-Skills            # upstream URL for external and adapted
+  source-ref: <commit or tag>   # external and adapted only
+  created: "YYYY-MM-DD"
+  reviewed: "YYYY-MM-DD"
+  reviewed-by: <person or agent>
+  review-every-days: "90"       # 14 to 30 for external and adapted
+  review-due: "YYYY-MM-DD"      # reviewed + review-every-days
+  notes: <one line shown in the index>
 ---
 ```
+
+The review fields are explained in [skills/meta/skill-review](skills/meta/skill-review/SKILL.md).
+External and adapted skills are pinned copies: never fetch, `npx -y` or run `@latest`
+upstream code at use time, and start the body with the review check section.
 
 The body defines these sections:
 
@@ -45,5 +59,7 @@ Scripts must be portable (no absolute machine paths). Prefer paths relative to t
 - [ ] Scripts are portable: no absolute machine paths.
 - [ ] `bash -n` passes on each `.sh`. `python3 -m py_compile` passes on each `.py`. Caches from that check are not committed.
 - [ ] `.sh` and `.py` files that are meant to be run are executable.
-- [ ] A row is in `SKILLS_INDEX.md` under the group, and a row is in the skills table in `README.md`.
+- [ ] Review metadata is filled in, and `review-due` equals `reviewed` plus `review-every-days`.
+- [ ] External and adapted skills: `source` and an exact `source-ref`, a pinned copy, upstream telemetry or runtime fetching noted in `notes`, and the review check section first in the body.
+- [ ] `python3 skills/meta/skill-review/build_index.py` was run (it writes `SKILLS_INDEX.md` and the `README.md` table), and `check_reviews.py` exits 0.
 - [ ] No `__pycache__/`, `.venv/`, or stray `*.mp4` (samples only under `examples/`).
