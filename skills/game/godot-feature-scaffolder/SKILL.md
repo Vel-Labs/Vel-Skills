@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Scaffolds a feature plan, tasks, acceptance criteria, and asset requests. Origin unknown.
+  notes: Scaffolds a feature plan, tasks, acceptance criteria, and asset requests. Personal Godot workflow tooling for game development and art.
 ---
 
 # Godot Feature Scaffolder

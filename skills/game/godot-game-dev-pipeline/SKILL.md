@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Routes Godot game planning, assets, integration, and release checks. Origin unknown.
+  notes: Routes Godot game planning, assets, integration, and release checks. Personal Godot workflow tooling for game development and art.
 ---
 
 # Godot Game Dev Pipeline

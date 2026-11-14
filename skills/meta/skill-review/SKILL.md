@@ -42,7 +42,7 @@ read it critically, and agents check that date when they use it.
 - Installing upstream plugins or running upstream CLIs.
 - Publishing a skill that contains secrets, personal data or employer/client data.
 
-### The metadata every skill carries
+## The metadata every skill carries
 
 ```yaml
 metadata:

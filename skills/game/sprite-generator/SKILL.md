@@ -10,7 +10,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Plans, validates, and packages generated sprite packs for Godot. Origin unknown.
+  notes: Plans, validates, and packages generated sprite packs for Godot. Personal Godot workflow tooling for game development and art.
 ---
 
 # Sprite Generator

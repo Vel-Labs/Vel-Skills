@@ -46,7 +46,7 @@ Read [browser-execution.md](references/browser-execution.md) and only the releva
 driver reference. Verify actual capabilities before assigning work. Do not claim
 a browser journey from source inspection, mocked interaction, or an API probe.
 
-### run independent journeys
+### Run independent journeys
 
 Use these five profiles by default for a comprehensive run; honor a narrower or
 different requested set:
@@ -72,7 +72,7 @@ before changing the app; do not mix pre-fix and post-fix builds in one cohort.
 The coordinator applies the relevant [coverage checks](references/coverage.md)
 separately. Do not count these checks as extra persona users.
 
-### consolidate and repair
+### Consolidate and repair
 
 Merge findings by supported root cause, retaining each observation and evidence
 link. Rank by consequence, then affected/exposed personas and recovery cost.
@@ -85,7 +85,7 @@ regressions. Preserve unrelated work. Resolve ambiguous intended behavior before
 changing it; continue independent work when one issue is blocked. Do not silently
 change success criteria, expected behavior, or fixtures to obtain a pass.
 
-### verify and report
+### Verify and report
 
 After fixes, replay each original failure against the recorded expectation.
 Also rerun the selected personas in fresh sessions and, where available, fresh

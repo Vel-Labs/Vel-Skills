@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Reports large images, transparent margins, and mobile readiness risks. Origin unknown.
+  notes: Reports large images, transparent margins, and mobile readiness risks. Personal Godot workflow tooling for game development and art.
 ---
 
 # Godot Mobile Optimization Checker

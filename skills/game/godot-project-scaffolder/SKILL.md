@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Creates a baseline Godot 4.x project structure. Origin unknown.
+  notes: Creates a baseline Godot 4.x project structure. Personal Godot workflow tooling for game development and art.
 ---
 
 # Godot Project Scaffolder

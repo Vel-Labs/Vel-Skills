@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Packages generated sprite sheets and frame metadata for Godot. Origin unknown.
+  notes: Packages generated sprite sheets and frame metadata for Godot. Personal Godot workflow tooling for game development and art.
 ---
 
 # Godot Sprite Importer

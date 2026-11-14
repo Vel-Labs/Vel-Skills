@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Creates export manifests and platform QA checklists. Origin unknown.
+  notes: Creates export manifests and platform QA checklists. Personal Godot workflow tooling for game development and art.
 ---
 
 # Godot Export Packager
