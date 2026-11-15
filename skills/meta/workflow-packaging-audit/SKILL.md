@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Finds repeated work worth packaging. Replaced workspace folder names with caller-supplied evidence locations. Origin unknown.
+  notes: Finds repeated work worth packaging. Replaced workspace folder names with caller-supplied evidence locations.
 ---
 
 # Workflow Packaging Audit

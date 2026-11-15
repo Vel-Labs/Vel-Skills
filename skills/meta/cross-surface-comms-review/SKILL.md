@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
-  notes: Adapts channel copy while preserving source and reviewer state. Origin unknown.
+  notes: Adapts channel copy while preserving source and reviewer state.
 ---
 
 # Cross-Surface Comms Review
