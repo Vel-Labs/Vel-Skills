@@ -1,6 +1,15 @@
 ---
-name: app-demo-video
-description: Use when making a demo, promo, or launch video of a working app, prototype, pipeline, or dataset with real data and dramatic, click-baity framing, including when the content has no UI yet and should be stood up as a camera-ready frontend first, or when a past cut felt like a slide deck or had captions covering the UI.
+name: "app-demo-video"
+description: "Use when making a demo, promo, or launch video of a working app, prototype, pipeline, or dataset with real data and dramatic, click-baity framing, including when the content has no UI yet and should be stood up as a camera-ready frontend first, or when a past cut felt like a slide deck or had captions covering the UI."
+metadata:
+  origin: internal
+  source: Vel-Skills
+  created: "2026-11-12"
+  reviewed: "2026-11-14"
+  reviewed-by: Codex (GPT-6)
+  review-every-days: "90"
+  review-due: "2027-02-12"
+  notes: Records real app interactions and adds a reserved caption bar and evidence-backed title cards.
 ---
 
 # App demo video

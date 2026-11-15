@@ -65,8 +65,9 @@ example "Upstream telemetry removed; guides only" or "Needs a paid API key".
 ### Adding a skill
 
 1. Put it at `skills/<group>/<kebab-name>/` per [CONTRIBUTING.md](../../../CONTRIBUTING.md).
-2. Fill in the metadata. For external content, copy a pinned snapshot into the
-   folder; do not fetch, `npx -y`, or run `@latest` at use time.
+2. Fill in the metadata. For external or adapted content, record the
+   redistribution license in top-level `license` and include required notices.
+   Copy a pinned snapshot into the folder; do not fetch, `npx -y`, or run `@latest` at use time.
 3. For external and adapted skills, start the body with the check section:
    compare today with `review-due`; if past, tell the person when it was last
    reviewed against which source and ref, and offer to review now; if they
