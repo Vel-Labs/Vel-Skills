@@ -1,8 +1,15 @@
 # Contributing
 
-Each skill lives at `skills/<group>/<kebab-name>/`.
+Each public skill lives at `skills/<group>/<kebab-name>/`.
 
 `<group>` is a short topic name such as `media`. `<kebab-name>` is lowercase words separated by hyphens, and it matches the `name` in that skill's frontmatter.
+
+## Working copy
+
+Clone this library as your local skills folder. Store private skills under
+ignored `private/<name>/`. Link agent skill folders to the corresponding skill
+directories in the checkout and leave vendor-managed installs in place. Check
+review metadata for both locations with `check_reviews.py --include-private`.
 
 ## SKILL.md
 
@@ -62,5 +69,5 @@ Scripts must be portable (no absolute machine paths). Prefer paths relative to t
 - [ ] `.sh` and `.py` files that are meant to be run are executable.
 - [ ] Review metadata is filled in, and `review-due` equals `reviewed` plus `review-every-days`.
 - [ ] External and adapted skills: `source` and an exact `source-ref`, a pinned copy, upstream telemetry or runtime fetching noted in `notes`, and the review check section first in the body.
-- [ ] `python3 skills/meta/skill-review/build_index.py` was run (it writes `SKILLS_INDEX.md` and the `README.md` table), and `check_reviews.py` exits 0.
+- [ ] On a branch, run `build_index.py` and `check_reviews.py` before committing. Stage explicit paths and scan the staged changes for private data. Open a pull request and merge only with the person's authorization.
 - [ ] No `__pycache__/`, `.venv/`, or stray `*.mp4` (samples only under `examples/`).

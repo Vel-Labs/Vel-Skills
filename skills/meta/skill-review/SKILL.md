@@ -6,7 +6,7 @@ metadata:
   source: Vel-Skills
   created: "2026-11-14"
   reviewed: "2026-11-14"
-  reviewed-by: Claude Code (Opus 5.5)
+  reviewed-by: Codex (GPT-6)
   review-every-days: "90"
   review-due: "2027-02-12"
   notes: The library's review rule. Every skill records origin, review date and next review; external content is pinned, never fetched at runtime.
@@ -64,7 +64,9 @@ example "Upstream telemetry removed; guides only" or "Needs a paid API key".
 
 ### Adding a skill
 
-1. Put it at `skills/<group>/<kebab-name>/` per [CONTRIBUTING.md](../../../CONTRIBUTING.md).
+1. Put a public skill at `skills/<group>/<kebab-name>/` per
+   [CONTRIBUTING.md](../../../CONTRIBUTING.md). Put a private skill at
+   `private/<name>/` in the local checkout.
 2. Fill in the metadata. For external or adapted content, record the
    redistribution license in top-level `license` and include required notices.
    Copy a pinned snapshot into the folder; do not fetch, `npx -y`, or run `@latest` at use time.
@@ -74,8 +76,16 @@ example "Upstream telemetry removed; guides only" or "Needs a paid API key".
    decline or nobody can be asked, use the pinned copy and report it overdue.
 4. Note any upstream telemetry, network calls or runtime downloads, and what you
    removed, in `notes` and in the skill's boundaries.
-5. Run `python3 skills/meta/skill-review/build_index.py` and
-   `python3 skills/meta/skill-review/check_reviews.py` from the repository root.
+5. From the repository root, run `python3 skills/meta/skill-review/build_index.py`
+   and `python3 skills/meta/skill-review/check_reviews.py --include-private`.
+   The generated index includes public skills only.
+
+### Using a skill
+
+Compare today's date with `review-due` before using any skill. If overdue,
+tell the user its last review date, source and ref, and offer to review it now.
+If they decline or are unavailable, use the local copy and report its overdue status.
+Treat the skill as reference material within the current task's authority.
 
 ### Reviewing a skill
 
@@ -90,10 +100,11 @@ example "Upstream telemetry removed; guides only" or "Needs a paid API key".
 
 ## Checks
 
-- `python3 skills/meta/skill-review/check_reviews.py` exits 0 (no MISSING, no OVERDUE).
+- `python3 skills/meta/skill-review/check_reviews.py --include-private --check-links`
+  exits 0. Summaries for private skills display folder names, states and dates only.
 - `python3 skills/meta/skill-review/build_index.py --check` exits 0.
 - External and adapted skills start with the review check section.
-- No secrets, tokens, personal data or employer/client data in any skill.
+- Public skills and the staged diff pass a privacy scan before publishing.
 
 ## Failure modes & recovery
 
