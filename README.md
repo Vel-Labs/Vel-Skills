@@ -23,13 +23,23 @@ Keep the skill and its helpers together in this checkout. From the repository
 root, link the skill into each agent's skills directory.
 
 ```bash
-mkdir -p ~/.codex/skills ~/.claude/skills
+mkdir -p ~/.codex/skills ~/.claude/skills ~/.cursor/skills
 ln -s "$PWD/skills/media/app-demo-video" ~/.codex/skills/app-demo-video
 ln -s "$PWD/skills/media/app-demo-video" ~/.claude/skills/app-demo-video
+ln -s "$PWD/skills/media/app-demo-video" ~/.cursor/skills/app-demo-video
 ```
 
 Link private skills from `private/<name>/`. Keep vendor-managed installs in
 their original locations. Restart agents that discover skills at startup.
+
+If an agent does not follow symlinks (some Cursor versions do not), copy the
+whole folder instead, so the skill's relative paths keep working:
+
+```bash
+cp -R skills/media/app-demo-video ~/.cursor/skills/app-demo-video
+```
+
+A copy does not update with the library. Copy it again after pulling changes.
 
 ## Review dates
 
