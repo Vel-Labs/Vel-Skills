@@ -19,37 +19,27 @@ CONTRIBUTING.md                 # skill contract and new-skill checklist
 
 ## Install a skill locally
 
-Copy the skill folder into the agent's skills directory. The folder has to move as a unit so those relative paths keep working.
+Keep the skill and its helpers together in this checkout. From the repository
+root, link the skill into each agent's skills directory.
 
 ```bash
-# Codex — keep the group
-mkdir -p ~/.codex/skills/<group>
-cp -R skills/<group>/<name> ~/.codex/skills/<group>/<name>
-
-# Cursor
-mkdir -p ~/.cursor/skills
-cp -R skills/<group>/<name> ~/.cursor/skills/<name>
+mkdir -p ~/.codex/skills ~/.claude/skills
+ln -s "$PWD/skills/media/app-demo-video" ~/.codex/skills/app-demo-video
+ln -s "$PWD/skills/media/app-demo-video" ~/.claude/skills/app-demo-video
 ```
 
-Example for the skill in this repo:
-
-```bash
-mkdir -p ~/.codex/skills/media ~/.cursor/skills
-cp -R skills/media/app-demo-video ~/.codex/skills/media/app-demo-video
-cp -R skills/media/app-demo-video ~/.cursor/skills/app-demo-video
-```
-
-Restart the agent session if it only reads skills at startup, then point it at the copied `SKILL.md`.
+Link private skills from `private/<name>/`. Keep vendor-managed installs in
+their original locations. Restart agents that discover skills at startup.
 
 ## Review dates
 
-Every skill records where it came from and when it was last reviewed (see
-[skills/meta/skill-review](skills/meta/skill-review/SKILL.md)). Skills taken from
-another repository are pinned copies; an agent that uses one past its review date
-tells you and offers to check upstream first. To see every skill's state:
+Every public and private skill records its source and review date. Before
+using an overdue skill, tell the user its last review date and source and offer
+to review it. See [skill-review](skills/meta/skill-review/SKILL.md).
 
 ```bash
 python3 skills/meta/skill-review/check_reviews.py
+python3 skills/meta/skill-review/check_reviews.py --include-private --check-links
 ```
 
 ## Skills
