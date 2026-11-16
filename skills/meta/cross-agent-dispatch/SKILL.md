@@ -9,7 +9,7 @@ metadata:
   reviewed-by: Claude (Opus 5.5)
   review-every-days: "90"
   review-due: "2027-02-14"
-  notes: "Checked with codex-cli 0.162.0 and Claude Code 2.1.294. Model tiers are guidance; a project's own model decisions win."
+  notes: "Checked with codex-cli 0.162.0 and Claude Code 2.1.294. Brief checklist and templates by kind of work. Model tiers are guidance; a project's own model decisions win."
 ---
 
 # Cross-agent dispatch (Claude Code ⇄ Codex)
@@ -92,18 +92,91 @@ word wins over this table.
 
 ### The brief
 
-Write the brief to a file, not the command line. Start every brief with:
+Write the brief to a file, not the command line. Start from the template for
+the kind of work:
 
-```text
-This run is non-interactive. Nobody will answer questions. If something blocks
-you, record the blocker in your final message, take the safest reasonable
-choice, and continue. Do not merge, force-push, delete branches or publish.
-```
+| Template | Use for | Usual tier |
+|---|---|---|
+| [templates/brief-build.md](templates/brief-build.md) | A feature or package built to a spec | Sol 6.1 (high) or Sonnet; Astra or Opus if critical |
+| [templates/brief-integration.md](templates/brief-integration.md) | Proving parallel work fits together; tests and a report, no fixes | Sol 6.1 (high) or Sonnet; Astra or Opus across system boundaries |
+| [templates/brief-review.md](templates/brief-review.md) | A read-only review of a diff, PR or design | Astra (high) or Opus |
+| [templates/brief-research.md](templates/brief-research.md) | Read-only research with cited sources | Astra or Sol, or Opus or Sonnet; never Terra |
+| [templates/brief-mechanical.md](templates/brief-mechanical.md) | Roll-ups, regeneration, fixtures from a spec, mechanical refactors | Terra (high) or Sonnet/Haiku; Luna or Haiku if tiny |
+| [templates/brief-resume.md](templates/brief-resume.md) | A follow-up into a running session: a ruling or a main-merge request | The session's own model |
 
-Then give: one outcome; allowed and forbidden paths; the project rules to read
-first; acceptance checks with exact commands; whether to commit, push or open
-a PR; and the shape of the final message (changed files, checks run with
-results, blockers, open questions).
+A non-interactive worker can't ask. Every gap in the brief turns into a
+blocker and a full resume round trip, often longer than a fresh build.
+Spend the time on the brief instead.
+
+### Brief checklist
+
+Check every brief against this list before dispatch.
+
+1. **Where you are.** The repository, worktree path, branch, base commit, the
+   setup command to run once, and the sentence "You run non-interactively:
+   nobody will answer a question."
+2. **The spec and read-first list.** The spec file is the source of truth.
+   List the project's agent rules, standards and procedures to read first, in
+   order, then the spec and what it names.
+3. **Allowed files.** List the paths the worker may write, plus bookkeeping
+   files (status, progress notes, index rows, decision records). Before
+   dispatch, check the list against three things:
+   - **Generated files.** What will the change regenerate (contracts, types,
+     cards, fixtures, lockfiles)? Allow those files, name the command that
+     regenerates each, and say which worker owns them if several run at once.
+   - **The project's layering.** Where do the project's standards put this
+     kind of code (for example SQL only in the data layer)? Allow that folder,
+     or the worker will put the code in the wrong place or stop.
+   - **Parallel workers.** No allowed path may overlap another running
+     worker's, generated files included.
+4. **Out of scope.** What the worker must not change or fix, and what to do
+   instead (for example: record a finding, don't fix it).
+5. **Acceptance.** Tests and checks with exact commands. Expected results come
+   from the spec, fixtures or hand-derived counts, never from the code's
+   output. A real defect gets a strict expected-failure that names it, never a
+   loosened assertion.
+6. **Shared resources.** Databases, ports, caches and services the worker may
+   share with others; which ports to use; "re-run a connection or port failure
+   alone before treating it as real".
+7. **The gate.** Name the command. Run the full gate before the first PR.
+   After a merge from main that touched only docs or generated files, run the
+   fast gate: the dispatcher's own full gate decides the merge, so a second
+   full run by the worker only adds time.
+8. **The decision rule.** "When you would ask a question, record it as a
+   decision, take the conservative option, and continue. Mark any choice that
+   is hard to reverse so the dispatcher can check it."
+9. **Hard limits.** No merge, no force-push, no deleting branches, no
+   publishing, no secrets printed, no real client data, no spend beyond the
+   brief, nothing installed globally.
+10. **The end message.** PR link (or "no PR" and why), commit, gate totals as
+    printed, decisions taken, blockers, and a short Next block for the
+    dispatcher.
+
+Keep project rules in the project's own procedure files and point to them.
+The brief adds only what is specific to this task.
+
+### Resume briefs
+
+A resume costs a full round trip, so a ruling must be complete. Use
+[templates/brief-resume.md](templates/brief-resume.md). It names:
+
+- the ruling, or what changed on main and why the branch must take it;
+- the exact files to touch, and for each conflict which side to keep;
+- the regenerate commands, and "never hand-edit or hand-merge generated files";
+- which gate to run (fast or full; see the checklist);
+- the end message.
+
+### Merge order for parallel workers
+
+- **Assign shared generated files before dispatch.** One worker owns each
+  generated file; the others leave it alone and the owner regenerates after
+  merging main.
+- **Merge in the order that least disturbs generated files.** Merge first the
+  branch that changes the fewest generated files, or the one others build on.
+  Each merge to main makes every later branch merge main again, regenerate and
+  rerun its gate.
+- **Batch rulings.** When several branches need the same main merge, wait for
+  the merge order to settle, then send each one resume with the final main.
 
 ### Direction 1: Claude Code → Codex
 
@@ -197,6 +270,7 @@ results, blockers, open questions).
 
 ## Checks
 
+- Before dispatch, the brief passes the brief checklist.
 - The worker's final message exists and names the checks it ran.
 - The dispatcher reran those checks and they pass.
 - The diff touches only the allowed paths.
@@ -207,6 +281,10 @@ results, blockers, open questions).
 | What went wrong | What to do |
 |---|---|
 | Worker asked a question and stopped | Resume with the answer, and add the missing fact to future briefs. |
+| Worker stopped because a regenerated file was outside its allowed files | Rule which worker owns it, resume, and assign generated files up front next time. |
+| Worker put code in the wrong layer, or flagged the layer as a blocker | Allow the layer the standards require, resume, and check allowed files against the standards before dispatch. |
+| Each merge to main forces every other branch to re-merge and regenerate | Pick a merge order, batch the resumes, and pre-assign generated files. |
+| Worker and dispatcher both run the full gate on every head | After a docs-only or generated-only main merge, the worker runs the fast gate. |
 | `codex exec` exits at once | Read the log: wrong slug, bad `-c` value, or a sign-in problem. Check the models cache. |
 | `claude -p` hangs | It was waiting on stdin or a prompt. Redirect stdin from the brief and pass `--permission-prompts none`. |
 | `claude.json` has `"is_error": true` with "Failed to authenticate" | The CLI is signed out. Ask the person to run `claude auth login`. |
