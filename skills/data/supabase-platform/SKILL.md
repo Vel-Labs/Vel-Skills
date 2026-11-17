@@ -218,9 +218,24 @@ per-call approval on.
 | account | `create_project`, `pause_project`, `restore_project`, `get_cost`, `confirm_cost` | Explicit authority; call `confirm_cost` only after the person agrees to the quoted cost |
 | feedback | `submit_feedback` | Sends text to Supabase; only when the person asks |
 
-**Recommended connection for agent work:** one connection per project with
-`project_ref` set, `read_only=true`, and `features=database,debugging,docs`.
-Add a separate write-enabled connection only for a task that needs it.
+**Recommended setup for agent work:**
+
+1. Per project, one read-only connection (`project_ref`, `read_only=true`,
+   `features=database,debugging,docs`), and, only if writes are ever needed, one
+   write connection named with a `-write` suffix (`project_ref`,
+   `features=database,docs`). Keep account tools off both.
+2. In the agent's permission settings, allow the read-only connection's read
+   tools without a prompt (`search_docs`, `list_tables`, `list_extensions`,
+   `list_migrations`, `execute_sql`, `get_advisors`, `query_logs`). Allowing
+   `execute_sql` is safe only on a `read_only=true` connection. Set every tool on
+   a `-write` connection to ask first. In Claude Code this means `allow` entries such as
+   `mcp__<server>__list_tables` and an `ask` entry `mcp__<server>-write`.
+3. Answer questions through the read-only connection. Use the write connection
+   only for a change the person approved, and still prefer the project's
+   migration files for schema changes.
+
+Project refs are identifiers, not secrets, and may be committed. Never commit
+a token or key; the hosted server signs in through browser OAuth.
 
 **Troubleshooting:**
 
