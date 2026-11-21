@@ -1,15 +1,15 @@
 ---
 name: cross-agent-dispatch
-description: Use when Claude Code should hand a task to OpenAI Codex, or Codex should hand a task to Claude Code, through the other agent's CLI as a background run that wakes the dispatcher when it exits. Covers the worktree, brief file, model and effort choice by kind of work, resume, and review before merge.
+description: Use when Claude Code should hand a task to OpenAI Codex, or Codex should hand a task to Claude Code, through the other agent's CLI as a background run that wakes the dispatcher when it exits. Covers orchestration roles (lead, design lead, steward worker, builders), the worktree, brief file, model and effort choice by kind of work, resume, and review before merge.
 metadata:
   origin: internal
   source: Vel-Skills
   created: "2026-11-16"
-  reviewed: "2026-11-16"
+  reviewed: "2026-11-21"
   reviewed-by: Claude (Opus 5.5)
   review-every-days: "90"
-  review-due: "2027-02-14"
-  notes: "Checked with codex-cli 0.162.0 and Claude Code 2.1.294. Brief checklist and templates by kind of work. Model tiers are guidance; a project's own model decisions win."
+  review-due: "2027-02-19"
+  notes: "Checked with codex-cli 0.162.0 and Claude Code 2.1.294. Brief checklist and templates by kind of work. 2026-11-21: added orchestration roles (Claude lead, Opus design lead, steward worker); Codex tiers moved to GPT-6.2 Sol and Astra; Astra and Terra at medium. Model tiers are guidance; a project's own model decisions win."
 ---
 
 # Cross-agent dispatch (Claude Code ⇄ Codex)
@@ -68,6 +68,25 @@ own agent rules still apply to the worker.
 - **Wake on exit, don't poll.** Start the CLI as a background command so the
   host tells the dispatcher when it exits.
 
+### Orchestration roles
+
+For work that runs over many packages, split judgment from volume. A
+project's own decision record wins over this table.
+
+| Role | Who | Does |
+|---|---|---|
+| Lead | The strongest Claude model the person chooses (for example `fable`), in a session the person starts | Plans the work, writes briefs and rulings, dispatches workers, reviews each result against its brief, puts decisions to the person with a suggestion for each |
+| Design lead | Claude `opus` | Leads all visual design: mockups, screen design, design systems, and the visual-parity review before a screen is called done. Builders build screens only from mockups it led and the person approved |
+| Steward worker | Claude `opus` (medium), as a subagent or session the lead starts | Runs the full checks on a clean merged checkout, merges main, regenerates generated files, rolls up and merges what the lead passed |
+| Builders | Codex, by the task guide below | Build, integrate and fix to a brief; hand off with the fast checks |
+
+- **A session can't start another on a model above its own.** The person
+  starts the lead session; the lead starts the others.
+- **Keep context out of the chat.** The lead works from the project's own
+  handbook, status files and a short hand-off note, not from an earlier
+  conversation. It reads a worker's final message and the diff summary, not
+  its whole log.
+
 ### Task guide: which model
 
 A project's own decision record, a brief's suggested model, or the person's
@@ -75,9 +94,10 @@ word wins over this table.
 
 | Kind of work | Codex model (`-m`, effort) | Claude model (`--model`) |
 |---|---|---|
-| Critical: security, sign-in, secrets, privacy, governance, schema or migration design, cross-system design, reviews | `gpt-6-astra`, high | `opus` |
-| Extensive builds with a clear brief and strong tests | `gpt-6.1-sol`, high | `sonnet` |
-| Mechanical work with a clear spec and checks: roll-ups, regenerated contracts or types, fixtures from a spec, mechanical refactors | `gpt-6.1-terra`, high (always high) | `sonnet` or `haiku` |
+| Critical: security, sign-in, secrets, privacy, governance, schema or migration design, cross-system design, reviews | `gpt-6.2-astra`, medium (high if medium misses something) | `opus` |
+| Extensive builds with a clear brief and strong tests | `gpt-6.2-sol`, high | `sonnet` |
+| Visual design: mockups, screen design, design systems, visual-parity review | Builds only from an approved mockup | `opus` leads |
+| Mechanical work with a clear spec and checks: roll-ups, regenerated contracts or types, fixtures from a spec, mechanical refactors | `gpt-6.1-terra`, medium | `sonnet` or `haiku` |
 | Small tasks: lookups, tagging, one-file mechanical edits | `gpt-6-luna`, medium | `haiku` |
 
 - **Terra never writes text that states outside facts** (research, prices,
@@ -97,9 +117,9 @@ the kind of work:
 
 | Template | Use for | Usual tier |
 |---|---|---|
-| [templates/brief-build.md](templates/brief-build.md) | A feature or package built to a spec | Sol 6.1 (high) or Sonnet; Astra or Opus if critical |
-| [templates/brief-integration.md](templates/brief-integration.md) | Proving parallel work fits together; tests and a report, no fixes | Sol 6.1 (high) or Sonnet; Astra or Opus across system boundaries |
-| [templates/brief-review.md](templates/brief-review.md) | A read-only review of a diff, PR or design | Astra (high) or Opus |
+| [templates/brief-build.md](templates/brief-build.md) | A feature or package built to a spec | Sol 6.2 (high) or Sonnet; Astra or Opus if critical |
+| [templates/brief-integration.md](templates/brief-integration.md) | Proving parallel work fits together; tests and a report, no fixes | Sol 6.2 (high) or Sonnet; Astra or Opus across system boundaries |
+| [templates/brief-review.md](templates/brief-review.md) | A read-only review of a diff, PR or design | Astra (medium) or Opus |
 | [templates/brief-research.md](templates/brief-research.md) | Read-only research with cited sources | Astra or Sol, or Opus or Sonnet; never Terra |
 | [templates/brief-mechanical.md](templates/brief-mechanical.md) | Roll-ups, regeneration, fixtures from a spec, mechanical refactors | Terra (high) or Sonnet/Haiku; Luna or Haiku if tiny |
 | [templates/brief-resume.md](templates/brief-resume.md) | A follow-up into a running session: a ruling or a main-merge request | The session's own model |

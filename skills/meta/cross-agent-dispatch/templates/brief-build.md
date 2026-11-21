@@ -1,5 +1,5 @@
 <!--
-Build brief. Usual tier: Sol 6.1 (high) or Sonnet. Use Astra (high) or Opus when
+Build brief. Usual tier: Sol 6.2 (high) or Sonnet. Use Astra (medium) or Opus when
 the spec touches security, privacy, governance, schema or several systems.
 Replace every <placeholder>. Delete lines that don't apply. Check the brief
 against the brief checklist in ../SKILL.md before dispatch.
