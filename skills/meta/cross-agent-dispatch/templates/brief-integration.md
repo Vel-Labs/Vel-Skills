@@ -1,6 +1,6 @@
 <!--
 Integration brief: prove that work merged in parallel fits together. Tests and a
-report only; no fixes. Usual tier: Sol 6.1 (high) or Sonnet. Use Astra (high) or
+report only; no fixes. Usual tier: Sol 6.2 (high) or Sonnet. Use Astra (medium) or
 Opus when the integration crosses system, tenant or data boundaries.
 Replace every <placeholder>. Check against the brief checklist in ../SKILL.md.
 -->

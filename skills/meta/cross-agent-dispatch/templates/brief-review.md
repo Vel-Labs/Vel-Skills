@@ -1,5 +1,5 @@
 <!--
-Review brief: read-only review of a diff, PR or design. Usual tier: Astra (high)
+Review brief: read-only review of a diff, PR or design. Usual tier: Astra (medium)
 or Opus. Run it read-only: Codex `-s read-only`, Claude `--permission-mode plan`.
 Replace every <placeholder>. Check against the brief checklist in ../SKILL.md.
 -->

@@ -1,6 +1,6 @@
 <!--
 Mechanical brief: roll-ups, regenerated contracts or types, fixtures from a given
-spec, mechanical refactors, bookkeeping. Usual tier: Terra (high, always high) or
+spec, mechanical refactors, bookkeeping. Usual tier: Terra (medium) or
 Sonnet; Luna or Haiku for a single-file edit. The work must have a clear spec and
 checks that catch mistakes. Terra never writes text that states outside facts.
 Replace every <placeholder>. Check against the brief checklist in ../SKILL.md.

@@ -1,6 +1,6 @@
 <!--
 Research brief: read-only research that states outside facts (prices, platform
-rules, legal or vendor claims). Usual tier: Astra or Sol 6.1 (high), or Opus or
+rules, legal or vendor claims). Usual tier: Astra or Sol 6.2 (high), or Opus or
 Sonnet. Never Terra: it guesses too often when it doesn't know.
 Replace every <placeholder>. Check against the brief checklist in ../SKILL.md.
 -->
