@@ -1,17 +1,19 @@
 ---
 name: modern-web-guidance
-description: Use when building or changing web UI, CSS layout or animation, forms, accessibility, dark mode, performance (LCP, INP, CLS), web security or client-side JS. A pinned, reviewed copy of Google Chrome's modern web guides; read the matching guide before writing ad-hoc code or adding a dependency. Not for backend, infrastructure or tooling work.
+description: Apply pinned Chrome guidance to web UI changes and verify the affected interaction in a real browser, including dialog focus, motion, color scheme, or layout stability.
 license: Apache-2.0 for the guides (see LICENSE); the wrapper is part of Vel-Skills.
 metadata:
   origin: adapted
   source: https://github.com/GoogleChrome/modern-web-guidance
   source-ref: 4dd968349e54ca45a05dd5c818fb035c9054b022 (Release v1.0.0, 2026-11-10)
+  verification-source: https://github.com/vercel-labs/agent-browser
+  verification-ref: 25b5d76f2843bce7be6c59a56d3461b162ad4ac9
   created: "2026-11-14"
-  reviewed: "2026-11-14"
-  reviewed-by: Claude Code (Opus 5.5)
+  reviewed: "2026-11-19"
+  reviewed-by: Codex (GPT-6), extending the Claude Code review
   review-every-days: "14"
-  review-due: "2026-11-28"
-  notes: Guides only. Upstream's npx CLI is not used, so its default telemetry (search queries, agent name, OS sent to Google) and unpinned @latest execution are gone.
+  review-due: "2026-12-03"
+  notes: Pinned Chrome guides and browser checks adapted from Vercel Labs. Runtime npx downloads and guide-search telemetry are omitted.
 ---
 
 # Modern Web Guidance (pinned copy)
@@ -50,7 +52,7 @@ sanitising, passkeys, web components, dates and time zones, and built-in AI.
 
 - Code that follows the matching guides, including their fallbacks for
   features that are not Baseline widely available.
-- One line per guide used in the report: which guide, and the pitfall it avoided.
+- Record the guide ID, browser state, observed result, and any untested behavior.
 
 ## Non-goals
 
@@ -69,8 +71,23 @@ sanitising, passkeys, web components, dates and time zones, and built-in AI.
 3. Apply the guidance in the project's framework without dropping the platform
    feature. Follow each guide's fallback advice unless the project states a
    browser-support policy.
-4. Check the code against the guide before finishing, and name the guides used
-   in the report.
+4. For a regression, reproduce it before editing when feasible. Open the built UI
+   through its normal entry point in an available browser. Use the project’s
+   existing harness or an installed agent-browser. Pick the check that exercises
+   the changed behavior.
+
+   | Behavior | Observe in the browser |
+   | --- | --- |
+   | Modal focus | Open with the keyboard. Confirm initial focus, tab containment, Escape dismissal and focus return to the opener. |
+   | Reduced motion | Trigger the same interaction under both motion preferences. Inspect the affected element’s animation or transition while it runs. |
+   | Color scheme | Switch the browser preference and check computed foreground and background on the actual control in each theme. |
+   | Layout shift | Reproduce the load or interaction at the same viewport. Capture layout-shift entries and identify which element moved. |
+
+5. Report the observation with its guide. State which behavior remains unverified
+   if the browser or target state is unavailable. Restore emulated settings.
+
+Browser verification adapts the Apache-2.0 [Vercel Labs workflow](https://github.com/vercel-labs/agent-browser/blob/25b5d76f2843bce7be6c59a56d3461b162ad4ac9/skill-data/modern-web-guidance/SKILL.md).
+The maintained local guide snapshot and project browser tooling supply its inputs.
 
 ### Reviewing this skill
 
