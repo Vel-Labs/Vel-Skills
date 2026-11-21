@@ -7,8 +7,8 @@ metadata:
   created: "2026-11-19"
   reviewed: "2026-11-19"
   reviewed-by: Codex (GPT-6)
-  review-every-days: "14"
-  review-due: "2026-12-03"
+  review-every-days: "90"
+  review-due: "2027-02-17"
   notes: First-party embeds identify public posts. Keep excerpts, mirrors and generated previews attributable. No runtime tool installation.
 ---
 
